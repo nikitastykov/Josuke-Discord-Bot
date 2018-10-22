@@ -5,9 +5,9 @@ import os
 import sqlite3
 
 discord.__version__
-imgList = os.listdir("C:/pytnon_apps/discord bot/ALL_IMAGES/")
+imgList = os.listdir("IMG FULL PATH HERE")
 
-TOKEN = 'NDg3MjQ2MTUxODQ2OTg1NzM5.DnkrlA.OhEKAtXgTRtrArYaAfccYYzlNrU'
+TOKEN = 'TOKEN HERE'
 
 client = discord.Client()
 connection = sqlite3.connect("replies.db")
@@ -31,7 +31,7 @@ async def on_message(message):
           msg =random.choice(Answer)
           await client.send_message(message.channel, msg)
         elif message.content =='!img':
-            msg = ('cписок изображений :' + str(os.listdir("C:/pytnon_apps/discord bot/ALL_IMAGES/"))).format(message)
+            msg = ('cписок изображений :' + str(os.listdir("IMG FULL PATH HERE"))).format(message)
             await client.send_message(message.channel, msg)
         for item in commands:
             if message.content ==item[0]:
@@ -40,7 +40,7 @@ async def on_message(message):
         for item in imgList:
           if message.content =='!'+item[0:-4]:
             imgString = item # выбирает нужный
-            path = "C:/pytnon_apps/discord bot/ALL_IMAGES/" + imgString 
+            path = "IMG FULL PATH HERE" + imgString 
             await client.send_file(message.channel, path) # отправляет сообщение в канал
         for item in result:
           if message.content.startswith(item):
@@ -55,4 +55,4 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
-client.run('NDg3MjQ2MTUxODQ2OTg1NzM5.DnkrlA.OhEKAtXgTRtrArYaAfccYYzlNrU')
+client.run('TOKEN HERE')
