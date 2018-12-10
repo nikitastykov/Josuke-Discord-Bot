@@ -62,6 +62,10 @@ async def on_message(message):
         elif message.content =='!d2runame':
             msg = d2rucrawl('LINK HERE').format(message)
             await client.send_message(message.channel, msg)
+        elif message.content.startswith ('!d2'):
+            u_input=message.content[3:]
+            msg = d2rucrawl(u_input).format(message)
+            await client.send_message(message.channel, msg)
         for item in commands:
             if message.content ==item[0]:
                 msg = item[1].format(message)
