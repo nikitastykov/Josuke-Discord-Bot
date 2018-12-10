@@ -13,10 +13,8 @@ import time
 
 def d2rucrawl(url):
     html = urlopen(url)
-
     soup = BeautifulSoup(html, 'lxml')
     type(soup)
-
     rows = soup.find_all('div',class_='dropdown')
     str_cells = str(rows)
     username = BeautifulSoup(str_cells, "lxml").get_text()
@@ -24,9 +22,11 @@ def d2rucrawl(url):
     rows2 = soup.find_all('span',id="user-posts-count")
     str_cells2 = str(rows2)
     messagesn = BeautifulSoup(str_cells2, "lxml").get_text()
-
+    rows3 = soup.find_all('span',class_="points")
+    str_cells3 = str(rows3)
+    likes = BeautifulSoup(str_cells3, "lxml").get_text()
     img = soup.find_all('img',class_='my')
-    return 'Никнейм: ' + username.replace(' ','')[1:-1] + ', Сообщения: '+ messagesn[1:-1]+' Аватар: '+'https://dota2.ru'+str(img)[39:-4] #не совсем корректно работает. нужно фиксить
+    return 'Никнейм: ' + username.replace(' ','')[2:-1] + ', Сообщения: '+ messagesn[1:-1] +', Симпатии: ' + likes[1:-1]+' Аватар: '+'https://dota2.ru'+str(img)[39:-4] #не совсем корректно работает. нужно фиксить
 
 discord.__version__
 imglist = os.listdir("IMG PATH HERE")
