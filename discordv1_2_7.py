@@ -48,7 +48,6 @@ new=[]
 for i in imglist:
     new.append('!' +i[0:-4])
 
-
 Answer = ('Отстань от меня!','Я занят, не приставай','Информация обо мне доступена по команде !about','DORARARARARARARA!','Break through and beat you up!','Watch your mouth!')
 @client.event
 async def on_message(message):
@@ -60,9 +59,6 @@ async def on_message(message):
           await client.send_message(message.channel, msg)
         elif message.content =='!img':
             msg = ('cписок изображений : ' +', '.join(new) ).format(message)
-            await client.send_message(message.channel, msg)
-        elif message.content =='!d2runame':
-            msg = d2rucrawl('LINK HERE').format(message)
             await client.send_message(message.channel, msg)
         elif message.content.startswith ('!d2'):
             u_input=message.content[3:]
@@ -80,6 +76,7 @@ async def on_message(message):
         for item in result:
           if message.content.startswith(item):
             await client.add_reaction(message,item[1])
+
 
 
 
