@@ -23,8 +23,10 @@ def d2rucrawl(url):
     #rows2 = soup.find_all('h4',class_='minor-heading') #,id_="user-posts-count"
     rows2 = soup.find_all('span',id="user-posts-count")
     str_cells2 = str(rows2)
-    messagesn = BeautifulSoup(str_cells2, "lxml").get_text()    
-    return 'Никнейм: ' + username.replace(' ','')[1:-1] + ', Сообщения: '+ messagesn[1:-1]
+    messagesn = BeautifulSoup(str_cells2, "lxml").get_text()
+
+    img = soup.find_all('img',class_='my')
+    return 'Никнейм: ' + username.replace(' ','')[1:-1] + ', Сообщения: '+ messagesn[1:-1]+' Аватар: '+'https://dota2.ru'+str(img)[39:-4]
 
 discord.__version__
 imglist = os.listdir("IMG PATH HERE")
