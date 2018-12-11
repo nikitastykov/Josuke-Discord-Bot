@@ -18,7 +18,6 @@ def d2rucrawl(url):
     rows = soup.find_all('div',class_='dropdown')
     str_cells = str(rows)
     username = BeautifulSoup(str_cells, "lxml").get_text()
-    #rows2 = soup.find_all('h4',class_='minor-heading') #,id_="user-posts-count"
     rows2 = soup.find_all('span',id="user-posts-count")
     str_cells2 = str(rows2)
     messagesn = BeautifulSoup(str_cells2, "lxml").get_text()
@@ -54,7 +53,7 @@ for i in imglist:
 Answer = ('Отстань от меня!','Я занят, не приставай','Информация обо мне доступена по команде !about','DORARARARARARARA!','Break through and beat you up!','Watch your mouth!')
 @client.event
 async def on_message(message):
-        # we do not want the bot to reply to itself
+        # чтобы бот не отвечал себе
         if message.author == client.user:
             return
         elif client.user.mentioned_in(message) and message.mention_everyone is False:
@@ -63,7 +62,7 @@ async def on_message(message):
         elif message.content =='!img':
             msg = ('cписок изображений : ' +', '.join(new) ).format(message)
             await client.send_message(message.channel, msg)
-        elif message.content.startswith ('!d2'):
+        elif message.content.startswith ('!d2'): #выводит инфо по профилю форума
             u_input=message.content[3:]
             msg = d2rucrawl(u_input).format(message)
             await client.send_message(message.channel, msg)
