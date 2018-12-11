@@ -28,7 +28,7 @@ def d2rucrawl(url):
     img_a=(str(img).split('/')[1:7])
     img_b=[i+'/'for i in img_a]
     img_c=[''.join(img_b)]
-    return 'Никнейм: ' + username.replace(' ','')[2:-1] + ', Сообщения: '+ messagesn[1:-1] +', Симпатии: ' + likes[1:-1]+' Аватар: '+'https://dota2.ru/'+str(img_c)[2:-3]
+    return 'Никнейм: ' + username.replace(' ','')[2:-1] + ', Сообщения: '+ messagesn[1:-1] +', Симпатии: ' + likes[1:-1]+' Аватар: '+'https://dota2.ru/'+str(img_c)[2:-4]
 
 discord.__version__
 imglist = os.listdir("IMG PATH HERE")
