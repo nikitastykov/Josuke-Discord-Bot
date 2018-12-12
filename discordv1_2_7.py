@@ -33,7 +33,7 @@ def d2rucrawl(url):
     img_b=[i+'/'for i in img_a]
     img_c=[''.join(img_b)]
 
-    while pages <10 and pages !=0: #блок расчета колличества постов
+    while pages <10 and pages !=0: #блок расчета количества постов
         html = urlopen(url+'activity/page-'+str(pages))
         soup = BeautifulSoup(html, 'lxml')
         type(soup)
@@ -95,9 +95,6 @@ async def on_message(message):
             await client.send_message(message.channel, msg)
         elif message.content.startswith ('!d2'): #выводит инфо по профилю форума
             u_input=message.content[3:]
-            #working='Собираю данные с Д2ру'
-            #msg2 = working.format(message)
-            #await client.send_message(message.channel, msg2)
             msg = d2rucrawl(u_input).format(message)
             await client.send_message(message.channel, msg)
         for item in commands:
