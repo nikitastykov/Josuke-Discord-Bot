@@ -12,6 +12,7 @@ import re
 import time
 
 def d2rucrawl(url):
+    print('работаю')
     pages=1
     activity=[]    
 
@@ -32,7 +33,7 @@ def d2rucrawl(url):
     img_b=[i+'/'for i in img_a]
     img_c=[''.join(img_b)]
 
-    while pages <11 and pages !=0: #блок расчета колличества постов
+    while pages <10 and pages !=0: #блок расчета колличества постов
         html = urlopen(url+'activity/page-'+str(pages))
         soup = BeautifulSoup(html, 'lxml')
         type(soup)
@@ -41,9 +42,11 @@ def d2rucrawl(url):
         activ = BeautifulSoup(str_cells4, "lxml").get_text()
         activity.append(activ)
         pages+=1
+        time.sleep( 0.1 )
+        print('Страница'+str(pages))
     data=activity
     text_string2 = str(data).lower()
-    match_pattern2 = re.findall(r'\b[а-я]{3,15}\b', text_string2)
+    match_pattern2 = re.findall(r'\b[а-я]{4,15}\b', text_string2)
     frequency2 = {}
     for word in match_pattern2:
       count = frequency2.get(word,0)
@@ -51,11 +54,12 @@ def d2rucrawl(url):
     frequency_list2 = frequency2.keys()
     activity_mess=[]
     for words in frequency_list2:
-        if frequency2[words] >5:
+        if frequency2[words] >10:
           activity_mess.append(str(words) +': '+ str(frequency2[words]))
 
     activity_end=', '.join(activity_mess)
-    return 'Никнейм: ' + username.replace(' ','')[2:-1] + ', Сообщения: '+ messagesn[1:-1] +', Симпатии: ' + likes[1:-1]+' Часто используемые слова - за последние 100 сообщений '+ activity_end +' Аватар: '+'https://dota2.ru/'+str(img_c)[2:-4]
+    return 'Никнейм: ' + username.replace(' ','')[2:-1] + ', Сообщения: '+ messagesn[1:-1] +', Симпатии: ' + likes[1:-1]+' Часто используемые слова  за последние 100 сообщений - '+ activity_end +' Аватар: '+'https://dota2.ru/'+str(img_c)[2:-4]
+
 
 discord.__version__
 imglist = os.listdir("IMG PATH HERE")
@@ -91,6 +95,9 @@ async def on_message(message):
             await client.send_message(message.channel, msg)
         elif message.content.startswith ('!d2'): #выводит инфо по профилю форума
             u_input=message.content[3:]
+            working='Собираю данные с Д2ру'
+            msg2 = working.format(message)
+            await client.send_message(message.channel, msg2)
             msg = d2rucrawl(u_input).format(message)
             await client.send_message(message.channel, msg)
         for item in commands:
