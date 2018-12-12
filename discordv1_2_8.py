@@ -107,7 +107,7 @@ async def on_message(message):
           #msg =random.choice(Answer)
           #await client.send_message(message.channel, msg)
         elif client.user.mentioned_in(message) and message.mention_everyone is False:
-            msg =textMessage(message.content[23:])
+            msg =textMessage(message.content[22:])
             await client.send_message(message.channel, msg)
         elif message.content =='!img':
             msg = ('cписок изображений : ' +', '.join(new) ).format(message)
