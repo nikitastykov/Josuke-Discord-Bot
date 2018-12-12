@@ -1,5 +1,13 @@
 #Файл для тестов всяких элементов бота
 
+import seaborn as sns
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+import bs4
+import lxml
+import re
+import string
+
 #кусочек паучка для получения последних сообщений 
 def d2rucrawl(url):
     html = urlopen(url+'activity/')
