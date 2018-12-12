@@ -54,7 +54,7 @@ def d2rucrawl(url):
     frequency_list2 = frequency2.keys()
     activity_mess=[]
     for words in frequency_list2:
-        if frequency2[words] >10:
+        if frequency2[words] >5:
           activity_mess.append(str(words) +': '+ str(frequency2[words]))
 
     activity_end=', '.join(activity_mess)
