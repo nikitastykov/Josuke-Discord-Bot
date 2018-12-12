@@ -10,14 +10,20 @@ import string
 
 #кусочек паучка для получения последних сообщений 
 def d2rucrawl(url):
-    html = urlopen(url+'activity/')
+    pages=1
+    activity=[]
+    while pages <4 and pages !=0:
 
-    soup = BeautifulSoup(html, 'lxml')
-    type(soup)
+        html = urlopen(url+'activity/page-'+str(pages))
 
-    rows4 = soup.find_all('div',class_='text-medium')
-    str_cells4 = str(rows4)
-    activity = BeautifulSoup(str_cells4, "lxml").get_text()
+        soup = BeautifulSoup(html, 'lxml')
+        type(soup)
+
+        rows4 = soup.find_all('div',class_='text-medium')
+        str_cells4 = str(rows4)
+        activ = BeautifulSoup(str_cells4, "lxml").get_text()
+        activity.append(activ)
+        pages+=1
     return activity
 
 
@@ -25,8 +31,8 @@ def d2rucrawl(url):
 a='https://dota2.ru/forum/members/kremennik.4337/'
 
 data=d2rucrawl(a)
-#расчет частоты использования слов
-text_string2 = data.lower()
+
+text_string2 = str(data).lower()
 #match_pattern = re.findall(r'\b[a-z]{3,15}\b', text_string)
 match_pattern2 = re.findall(r'\b[а-я]{3,15}\b', text_string2)
 frequency2 = {}
@@ -37,5 +43,5 @@ for word in match_pattern2:
 frequency_list2 = frequency2.keys()
  
 for words in frequency_list2:
-    if frequency2[words] >2:
+    if frequency2[words] >5:
         print (words, frequency2[words])
