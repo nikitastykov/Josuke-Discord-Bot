@@ -1,3 +1,5 @@
+__version__ = "$ Josuke_bot:v01_2_8 0. $"
+
 import discord
 import random
 import asyncio
