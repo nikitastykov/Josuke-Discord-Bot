@@ -1,5 +1,5 @@
-__version__ = "$ Josuke_bot:v01_2_8 0. $"
-
+__version__ = "$ Josuke_bot:v0.3 $"
+print(__version__)
 import discord
 import random
 import asyncio
@@ -14,6 +14,7 @@ import re
 import time
 import apiai
 import json
+import random
 
 def d2rucrawl(url):
     print('работаю')
@@ -79,7 +80,7 @@ def textMessage(update):
 
 
 discord.__version__
-imglist = os.listdir("IMAGES PATH")
+imglist = os.listdir("/home/ubuntu/bot/ALL_IMAGES/")
 
 TOKEN = 'DISCORD TOKEN'
 
@@ -123,10 +124,25 @@ async def on_message(message):
                 msg = item[1].format(message)
                 await client.send_message(message.channel, msg)
         for item in imglist:
-          if message.content =='!'+item[0:-4]:
-            imgString = item # выбирает нужный
-            path = "C:/pytnon_apps/discord bot/ALL_IMAGES/" + imgString 
-            await client.send_file(message.channel, path) # отправляет сообщение в канал
+            if message.content =='!'+item[0:-4]:
+                imgString = item # выбирает нужный
+                path = "/home/ubuntu/bot/ALL_IMAGES/" + imgString 
+                await client.send_file(message.channel, path) # отправляет сообщение в канал
+            elif message.content.startswith ('!love'):
+                randoml=random.randint(0,100)
+                if randoml > 70:
+                    path = "/home/ubuntu/bot/ALL_IMAGES/pepelove.png"
+                    await client.send_file(message.channel, path) 
+                    msg = ('Любовь между {0.author.mention}: и '  + message.content[5:]+' = '+ str(randoml)+'%').format(message)
+                    await client.send_message(message.channel, msg)
+                else:
+                    path = "/home/ubuntu/bot/ALL_IMAGES/cry.png"
+                    await client.send_file(message.channel, path) 
+                    msg = ('Любовь между {0.author.mention}: и '  + message.content[5:]+' = '+ str(randoml)+'%').format(message)
+                    await client.send_message(message.channel, msg)
+
+                    
+                break
         for item in result:
           if message.content.startswith(item):
             await client.add_reaction(message,item[1])
